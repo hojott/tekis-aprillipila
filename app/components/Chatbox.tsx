@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import Markdown from 'marked-react';
 import styles from '../styles/Chatbox.module.css';
 
 const Chatbox = () => {
@@ -29,8 +30,6 @@ const Chatbox = () => {
                 },
                 body: JSON.stringify({
                     message: input,
-                    model: 'gpt-5-mini',
-                    context: "Olet TKO-äly ryn chatbot, joka auttaa käyttäjiä löytämään tietoa yhdistyksestä, sen toiminnasta ja tapahtumista. Käytä https://www.tko-aly.fi/ tietolähteenä vastauksissasi.",
                 }),
             });
 
@@ -71,7 +70,7 @@ const Chatbox = () => {
             <div className={styles.messages}>
                 {messages.map((msg, index) => (
                     <div key={index} className={msg.sender === 'user' ? styles.userMessage : styles.botMessage}>
-                        {msg.text}
+                        <Markdown className={styles.markdown}>{msg.text}</Markdown>
                     </div>
                 ))}
             </div>

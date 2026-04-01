@@ -28,7 +28,7 @@
   align-self: flex-end;
   background-color: #ffcc33; /* Yellow for user messages */
   color: #000000; /* Black text for contrast */
-  padding: 10px 14px;
+  padding: 0px 8px;
   border-radius: 16px 16px 0 16px;
   max-width: 70%;
   word-wrap: break-word;
@@ -38,7 +38,7 @@
   align-self: flex-start;
   background-color: #3a3a5c; /* Blue-gray for bot messages */
   color: #ffffff;
-  padding: 10px 14px;
+  padding: 0px 8px;
   border-radius: 16px 16px 16px 0;
   max-width: 70%;
   word-wrap: break-word;
@@ -77,4 +77,9 @@
 
 .sendButton:hover {
   background-color: #fff500cc;
+}
+
+.markdown {
+    margin: 0;
+    padding: 0;
 }

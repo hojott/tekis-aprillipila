@@ -23,6 +23,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "marked-react": "^4.0.0",
     "next": "^16.2.2",
     "openai": "^6.33.0"
   }

@@ -9,9 +9,9 @@ const openai = new OpenAI(opts);
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        const { message, model } = body;
+        const { message } = body;
 
-        if (!message || !model) {
+        if (!message ) {
             return NextResponse.json({ error: 'Missing required fields: message or model' }, { status: 400 });
         }
 
@@ -19,7 +19,8 @@ export async function POST(req: Request) {
             async start(controller) {
                 try {
                     const completion = await openai.responses.create({
-                        model,
+                        model: 'gpt-5-mini',
+                        instructions: "Olet TKO-äly ryn chatbot, joka auttaa käyttäjiä löytämään tietoa yhdistyksestä, sen toiminnasta ja tapahtumista. Käytä https://www.tko-aly.fi/ tietolähteenä vastauksissasi.",
                         input: [{ role: 'user', content: message }],
                         tools: [{type: 'web_search',}],
                         stream: true,
