@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import styles from '../styles/Chatbox.module.css';
 
 const Chatbox = () => {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([
+        { text: "Tervetuloa TKO-äly ryn nettisivulle! Miten voin auttaa?", sender: "bot" }
+    ]);
     const [input, setInput] = useState('');
 
     const handleInputChange = (event) => {
@@ -19,17 +21,49 @@ const Chatbox = () => {
         setMessages((prevMessages) => [...prevMessages, userMessage]);
         setInput('');
 
-        const response = await fetch('/api/chatbot', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message: input }),
-        });
+        try {
+            const response = await fetch('/api/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: input,
+                    model: 'gpt-5-mini',
+                    context: "Olet TKO-äly ryn chatbot, joka auttaa käyttäjiä löytämään tietoa yhdistyksestä, sen toiminnasta ja tapahtumista. Käytä https://www.tko-aly.fi/ tietolähteenä vastauksissasi.",
+                }),
+            });
 
-        const data = await response.json();
-        const botMessage = { text: data.response, sender: 'bot' };
-        setMessages((prevMessages) => [...prevMessages, botMessage]);
+            if (!response.body) {
+                throw new Error('No response body');
+            }
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let botMessage = { text: '', sender: 'bot' };
+
+            // Add the bot message placeholder to the state
+            setMessages((prevMessages) => [...prevMessages, botMessage]);
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                botMessage.text += chunk;
+
+                // Update the bot message incrementally
+                setMessages((prevMessages) => {
+                    const updatedMessages = [...prevMessages];
+                    updatedMessages[updatedMessages.length - 1] = { ...botMessage };
+                    return updatedMessages;
+                });
+            }
+        } catch (error) {
+            console.error('Error communicating with the chatbot API:', error);
+            const errorMessage = { text: 'Sorry, something went wrong. Please try again later.', sender: 'bot' };
+            setMessages((prevMessages) => [...prevMessages, errorMessage]);
+        }
     };
 
     return (

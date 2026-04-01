@@ -5,7 +5,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <head>
-                <title>Chatbot</title>
+                <title>TKO-äly ry</title>
             </head>
             <body>
                 <header className={styles.header}>
