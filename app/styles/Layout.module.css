@@ -1,0 +1,27 @@
+.header {
+    background-color: #ffcc33;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Space between logo and title */
+    color: #000000;
+    font-weight: bold;
+    height: 64px; /* Fixed height for header */
+}
+
+.logo {
+    height: 48px; /* Adjust logo size */
+    width: auto;
+}
+
+.title {
+    font-size: 1.5rem;
+    flex: 1; /* Push the title to take up remaining space */
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 64px); /* Full height minus header */
+    background-color: #121212;
+}

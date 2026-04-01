@@ -1,0 +1,25 @@
+{
+  "name": "tekis-nettisivu",
+  "version": "1.0.0",
+  "description": "A Next.js project implementing a chatbot in a single large chatbox interface.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [
+    "nextjs",
+    "chatbot",
+    "react"
+  ],
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.1",
+    "typescript": "^5"
+  }
+}

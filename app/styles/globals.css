@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #ffffff;
+    height: 100%; /* Ensure the body takes up the full height */
+}
+
+html {
+    height: 100%; /* Ensure the html element takes up the full height */
+}
+
+* {
+    box-sizing: border-box;
+}
